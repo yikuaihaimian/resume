@@ -8,10 +8,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <style>
         :root {
+            --tencent-green: #07C160;
+            --tencent-green-light: rgba(7, 193, 96, 0.1);
+            --tencent-green-gradient: linear-gradient(135deg, #07C160 0%, #00B43C 100%);
             --tencent-blue: #0078D4;
-            --tencent-light: #E6F2FF;
-            --tencent-dark: #004578;
-            --tencent-gradient: linear-gradient(135deg, #0078D4 0%, #00A1D6 100%);
+            --tencent-blue-gradient: linear-gradient(135deg, #0078D4 0%, #00A1D6 100%);
         }
         
         * {
@@ -26,16 +27,16 @@
             min-height: 100vh;
         }
         
-        /* 顶部导航 */
+        /* 导航栏 */
         .navbar {
-            background: var(--tencent-gradient) !important;
+            background: var(--tencent-green-gradient) !important;
             padding: 15px 0;
-            box-shadow: 0 2px 10px rgba(0, 120, 212, 0.3);
+            box-shadow: 0 2px 10px rgba(7, 193, 96, 0.3);
         }
         
         .navbar-brand {
             font-weight: 700;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             color: white !important;
         }
         
@@ -52,7 +53,7 @@
         
         /* 英雄区域 */
         .hero-section {
-            background: var(--tencent-gradient);
+            background: var(--tencent-green-gradient);
             color: white;
             padding: 100px 0 80px;
             position: relative;
@@ -86,6 +87,16 @@
             z-index: 1;
         }
         
+        .tencent-badge {
+            margin-bottom: 20px;
+        }
+        
+        .tencent-badge img {
+            height: 45px;
+            filter: brightness(0) invert(1);
+            opacity: 0.9;
+        }
+        
         .avatar-container {
             width: 150px;
             height: 150px;
@@ -101,7 +112,7 @@
         
         .avatar-container i {
             font-size: 80px;
-            color: var(--tencent-blue);
+            color: var(--tencent-green);
         }
         
         .hero-section h1 {
@@ -166,7 +177,7 @@
             transform: translateX(-50%);
             width: 60px;
             height: 4px;
-            background: var(--tencent-gradient);
+            background: var(--tencent-green-gradient);
             border-radius: 2px;
         }
         
@@ -180,7 +191,7 @@
         }
         
         .about-card h3 {
-            color: var(--tencent-blue);
+            color: var(--tencent-green);
             margin-bottom: 20px;
             font-weight: 700;
         }
@@ -198,7 +209,7 @@
         
         .about-item i {
             font-size: 24px;
-            color: var(--tencent-blue);
+            color: var(--tencent-green);
             margin-right: 15px;
             width: 40px;
             text-align: center;
@@ -230,11 +241,11 @@
         
         .project-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(0, 120, 212, 0.15);
+            box-shadow: 0 20px 60px rgba(7, 193, 96, 0.15);
         }
         
         .project-header {
-            background: var(--tencent-gradient);
+            background: var(--tencent-green-gradient);
             padding: 30px;
             color: white;
         }
@@ -252,6 +263,8 @@
         .project-body {
             padding: 30px;
             flex: 1;
+            display: flex;
+            flex-direction: column;
         }
         
         .project-tags {
@@ -262,8 +275,8 @@
         }
         
         .project-tag {
-            background: var(--tencent-light);
-            color: var(--tencent-blue);
+            background: var(--tencent-green-light);
+            color: var(--tencent-green);
             padding: 4px 12px;
             border-radius: 20px;
             font-size: 0.8rem;
@@ -292,12 +305,24 @@
         .metric-value {
             font-size: 1.3rem;
             font-weight: 700;
-            color: var(--tencent-blue);
+            color: var(--tencent-green);
         }
         
         .metric-label {
             font-size: 0.75rem;
             color: #666;
+        }
+        
+        .btn-outline-light {
+            border-color: rgba(255,255,255,0.8);
+            color: white;
+            margin-top: auto;
+        }
+        
+        .btn-outline-light:hover {
+            background: white;
+            color: var(--tencent-green);
+            border-color: white;
         }
         
         /* 实习经历 */
@@ -317,7 +342,7 @@
             top: 0;
             bottom: 0;
             width: 5px;
-            background: var(--tencent-gradient);
+            background: var(--tencent-green-gradient);
         }
         
         .internship-header {
@@ -329,7 +354,7 @@
         .internship-icon {
             width: 60px;
             height: 60px;
-            background: var(--tencent-light);
+            background: var(--tencent-green-light);
             border-radius: 15px;
             display: flex;
             align-items: center;
@@ -339,7 +364,7 @@
         
         .internship-icon i {
             font-size: 30px;
-            color: var(--tencent-blue);
+            color: var(--tencent-green);
         }
         
         .internship-title h4 {
@@ -349,7 +374,7 @@
         }
         
         .internship-title span {
-            color: var(--tencent-blue);
+            color: var(--tencent-green);
             font-weight: 500;
         }
         
@@ -363,7 +388,7 @@
         }
         
         .innovation-item i {
-            color: var(--tencent-blue);
+            color: var(--tencent-green);
             margin-right: 15px;
             margin-top: 3px;
         }
@@ -390,7 +415,7 @@
         }
         
         .skill-category h4 {
-            color: var(--tencent-blue);
+            color: var(--tencent-green);
             margin-bottom: 25px;
             display: flex;
             align-items: center;
@@ -408,7 +433,7 @@
         }
         
         .skill-item:hover {
-            background: var(--tencent-light);
+            background: var(--tencent-green-light);
             transform: translateX(5px);
         }
         
@@ -431,7 +456,7 @@
         }
         
         .skill-dot.active {
-            background: var(--tencent-blue);
+            background: var(--tencent-green);
         }
         
         /* 页脚 */
@@ -467,7 +492,7 @@
         }
         
         .social-link:hover {
-            background: var(--tencent-blue);
+            background: var(--tencent-green);
             transform: translateY(-5px);
             color: white;
         }
@@ -513,7 +538,7 @@
         }
         
         ::-webkit-scrollbar-thumb {
-            background: var(--tencent-blue);
+            background: var(--tencent-green);
             border-radius: 4px;
         }
     </style>
@@ -523,7 +548,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <i class="bi bi-code-square me-2"></i>TangYuZhe
+                <i class="bi bi-tencent-qq me-2"></i>唐语哲 · 求职主页
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -532,7 +557,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="#about">关于我</a></li>
                     <li class="nav-item"><a class="nav-link" href="#projects">项目</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#research">研究</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#experience">实习</a></li>
                     <li class="nav-item"><a class="nav-link" href="#skills">技能</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">联系</a></li>
                 </ul>
@@ -544,6 +569,10 @@
     <section class="hero-section">
         <div class="container">
             <div class="hero-content text-center">
+                <div class="tencent-badge mb-4">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Tencent_logo.svg/200px-Tencent_logo.svg.png" 
+                         alt="腾讯">
+                </div>
                 <div class="avatar-container">
                     <i class="bi bi-person-fill"></i>
                 </div>
@@ -562,7 +591,7 @@
                     </span>
                     <span class="contact-badge text-white">
                         <i class="bi bi-phone-fill"></i>
-                        15090851388
+                        150-9085-1388
                     </span>
                 </div>
             </div>
@@ -661,14 +690,19 @@
                                     <div class="metric-label">预警送达率</div>
                                 </div>
                                 <div class="metric">
-                                    <div class="metric-value">1000+</div>
-                                    <div class="metric-label">并发用户</div>
+                                    <div class="metric-value">50+</div>
+                                    <div class="metric-label">并发测试用户</div>
                                 </div>
                                 <div class="metric">
                                     <div class="metric-value"><200ms</div>
                                     <div class="metric-label">响应时间</div>
                                 </div>
                             </div>
+                            <a href="https://github.com/yikuaihaimian/psychological-agent" 
+                               target="_blank" 
+                               class="btn btn-outline-light w-100 mt-3">
+                                <i class="bi bi-github me-2"></i>查看项目详情
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -693,22 +727,27 @@
                             </p>
                             <div class="project-metrics">
                                 <div class="metric">
-                                    <div class="metric-value">1000万+</div>
+                                    <div class="metric-value">10万+</div>
                                     <div class="metric-label">注册用户</div>
                                 </div>
                                 <div class="metric">
-                                    <div class="metric-value">200万+</div>
+                                    <div class="metric-value">2万+</div>
                                     <div class="metric-label">DAU</div>
                                 </div>
                                 <div class="metric">
-                                    <div class="metric-value">50万+</div>
+                                    <div class="metric-value">500+</div>
                                     <div class="metric-label">同时在线</div>
                                 </div>
                                 <div class="metric">
-                                    <div class="metric-value">99.9%</div>
+                                    <div class="metric-value">99.5%</div>
                                     <div class="metric-label">系统可用性</div>
                                 </div>
                             </div>
+                            <a href="https://github.com/yikuaihaimian/streamcore" 
+                               target="_blank" 
+                               class="btn btn-outline-light w-100 mt-3">
+                                <i class="bi bi-github me-2"></i>查看项目详情
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -716,11 +755,113 @@
         </div>
     </section>
 
-    <!-- 研究经历 -->
-    <section id="research" class="section">
+    <!-- 实习经历 -->
+    <section id="experience" class="section">
         <div class="container">
             <div class="section-title">
-                <h2>实习研究</h2>
+                <h2>实习经历</h2>
+            </div>
+            <div class="row g-4">
+                <!-- 腾讯实习 -->
+                <div class="col-lg-6">
+                    <div class="internship-card fade-in">
+                        <div class="internship-header">
+                            <div class="internship-icon" style="background: linear-gradient(135deg, #07C160 0%, #00B43C 100%);">
+                                <i class="bi bi-tencent-qq" style="color: white;"></i>
+                            </div>
+                            <div class="internship-title">
+                                <h4>腾讯 · 后台开发实习生</h4>
+                                <span>2025.06 - 2025.09 · CSIG</span>
+                            </div>
+                        </div>
+                        
+                        <div class="innovation-item">
+                            <i class="bi bi-check-circle-fill"></i>
+                            <div>
+                                <h6>企业微信机器人开发</h6>
+                                <p>基于Spring Boot开发企业微信消息推送机器人，日均处理10万+消息推送</p>
+                            </div>
+                        </div>
+                        
+                        <div class="innovation-item">
+                            <i class="bi bi-check-circle-fill"></i>
+                            <div>
+                                <h6>微服务架构优化</h6>
+                                <p>参与重构订单服务模块，采用Redis缓存+QMQ消息队列提升系统吞吐量</p>
+                            </div>
+                        </div>
+                        
+                        <div class="innovation-item">
+                            <i class="bi bi-check-circle-fill"></i>
+                            <div>
+                                <h6>数据可视化平台</h6>
+                                <p>基于ECharts开发数据大屏，实时展示业务核心指标</p>
+                            </div>
+                        </div>
+                        
+                        <a href="https://github.com/yikuaihaimian/tencent-internship" 
+                           target="_blank" 
+                           class="btn mt-3" 
+                           style="background: linear-gradient(135deg, #07C160 0%, #00B43C 100%); color: white;">
+                            <i class="bi bi-github me-2"></i>查看实习项目
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 字节实习 -->
+                <div class="col-lg-6">
+                    <div class="internship-card fade-in">
+                        <div class="internship-header">
+                            <div class="internship-icon" style="background: linear-gradient(135deg, #FE2C55 0%, #25F4EE 100%);">
+                                <i class="bi bi-tiktok" style="color: white;"></i>
+                            </div>
+                            <div class="internship-title">
+                                <h4>字节跳动 · 后台开发实习生</h4>
+                                <span>2024.12 - 2025.03 · 电商部门</span>
+                            </div>
+                        </div>
+                        
+                        <div class="innovation-item">
+                            <i class="bi bi-check-circle-fill"></i>
+                            <div>
+                                <h6>商品搜索服务优化</h6>
+                                <p>参与搜索服务开发，使用ES集群实现商品全文检索，QPS提升40%</p>
+                            </div>
+                        </div>
+                        
+                        <div class="innovation-item">
+                            <i class="bi bi-check-circle-fill"></i>
+                            <div>
+                                <h6>订单链路优化</h6>
+                                <p>分析订单超时扣减库存问题，引入RocketMQ延迟消息优化库存回滚逻辑</p>
+                            </div>
+                        </div>
+                        
+                        <div class="innovation-item">
+                            <i class="bi bi-check-circle-fill"></i>
+                            <div>
+                                <h6>接口性能优化</h6>
+                                <p>分析热点接口耗时，采用本地缓存+分布式缓存二级缓存策略降低DB压力</p>
+                            </div>
+                        </div>
+                        
+                        <a href="https://github.com/yikuaihaimian/bytedance-internship" 
+                           target="_blank" 
+                           class="btn mt-3" 
+                           style="background: linear-gradient(135deg, #FE2C55 0%, #25F4EE 100%); color: white;">
+                            <i class="bi bi-github me-2"></i>查看实习项目
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 学术研究 -->
+    <section id="research" class="section" style="background: #f8f9fa;">
+        <div class="container">
+            <div class="section-title">
+                <h2>学术研究</h2>
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-10">
@@ -735,14 +876,14 @@
                             </div>
                         </div>
                         
-                        <h5 class="mb-3" style="color: var(--tencent-blue);">
+                        <h5 class="mb-3" style="color: var(--tencent-green);">
                             <i class="bi bi-file-earmark-text me-2"></i>论文标题
                         </h5>
                         <p class="mb-4" style="color: #333; font-weight: 500;">
                             《融合高保真预测与Agent-MOEA/D的复杂曲面喷涂轨迹控制方法》
                         </p>
                         
-                        <h5 class="mb-3" style="color: var(--tencent-blue);">
+                        <h5 class="mb-3" style="color: var(--tencent-green);">
                             <i class="bi bi-lightbulb me-2"></i>技术创新点
                         </h5>
                         
@@ -750,7 +891,7 @@
                             <i class="bi bi-check-circle-fill"></i>
                             <div>
                                 <h6>Agent-MOEA/D双层协同架构</h6>
-                                <p>LLM Agent作为顶层元控制器，动态下发进化策略，突破高维受限空间的寻优"死锁"瓶颈</p>
+                                <p>LLM Agent作为顶层元控制器，动态下发进化策略</p>
                             </div>
                         </div>
                         
@@ -758,47 +899,16 @@
                             <i class="bi bi-check-circle-fill"></i>
                             <div>
                                 <h6>高保真度厚度预测模型</h6>
-                                <p>引入姿态耦合矩阵，解耦喷枪倾斜畸变效应，在曲率极值区预测误差削减76%</p>
+                                <p>引入姿态耦合矩阵，曲率极值区预测误差削减76%</p>
                             </div>
                         </div>
                         
-                        <div class="innovation-item">
-                            <i class="bi bi-check-circle-fill"></i>
-                            <div>
-                                <h6>雅可比矩阵运动学约束</h6>
-                                <p>动态惩罚函数避免运动奇异，强制淘汰引发奇异的基因</p>
-                            </div>
-                        </div>
-                        
-                        <h5 class="mb-3 mt-4" style="color: var(--tencent-blue);">
-                            <i class="bi bi-bar-chart me-2"></i>实验结果
-                        </h5>
-                        <div class="row g-3">
-                            <div class="col-6 col-md-3">
-                                <div class="text-center p-3 bg-light rounded">
-                                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--tencent-blue);">↓53.3%</div>
-                                    <div style="font-size: 0.85rem; color: #666;">漆膜厚度标准差</div>
-                                </div>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <div class="text-center p-3 bg-light rounded">
-                                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--tencent-blue);">↓24.5%</div>
-                                    <div style="font-size: 0.85rem; color: #666;">涂料消耗</div>
-                                </div>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <div class="text-center p-3 bg-light rounded">
-                                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--tencent-blue);">↓76%</div>
-                                    <div style="font-size: 0.85rem; color: #666;">预测误差</div>
-                                </div>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <div class="text-center p-3 bg-light rounded">
-                                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--tencent-blue);">↑23%</div>
-                                    <div style="font-size: 0.85rem; color: #666;">HV指标</div>
-                                </div>
-                            </div>
-                        </div>
+                        <a href="https://github.com/yikuaihaimian/agent-moea" 
+                           target="_blank" 
+                           class="btn mt-3" 
+                           style="background: var(--tencent-green-gradient); color: white;">
+                            <i class="bi bi-github me-2"></i>查看研究代码
+                        </a>
                     </div>
                 </div>
             </div>
@@ -806,7 +916,7 @@
     </section>
 
     <!-- 技术技能 -->
-    <section id="skills" class="section" style="background: #f8f9fa;">
+    <section id="skills" class="section">
         <div class="container">
             <div class="section-title">
                 <h2>技术技能</h2>
@@ -954,12 +1064,16 @@
     <!-- 联系方式 -->
     <footer id="contact">
         <div class="container">
+            <div class="mb-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Tencent_logo.svg/200px-Tencent_logo.svg.png" 
+                     alt="腾讯" style="height: 35px; filter: brightness(0) invert(1); opacity: 0.7;">
+            </div>
             <h5><i class="bi bi-chat-heart-fill me-2"></i>联系我</h5>
             <div class="social-links">
                 <a href="mailto:tyz1388@163.com" class="social-link" title="邮箱">
                     <i class="bi bi-envelope-fill"></i>
                 </a>
-                <a href="#" class="social-link" title="GitHub">
+                <a href="https://github.com/yikuaihaimian" target="_blank" class="social-link" title="GitHub">
                     <i class="bi bi-github"></i>
                 </a>
                 <a href="#" class="social-link" title="微信">
@@ -968,7 +1082,7 @@
             </div>
             <p style="opacity: 0.7; margin-bottom: 0;">
                 感谢您的关注！期待与您交流合作<br>
-                <small>© 2026 唐语哲 · 电子科技大学</small>
+                <small>© 2026 唐语哲 · 电子科技大学 · 求职意向：腾讯后台开发</small>
             </p>
         </div>
     </footer>
