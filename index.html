@@ -3,540 +3,931 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>唐语哲 - 个人主页 | 腾讯面试展示</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <title>唐语哲 Yuze Tang - Java后端开发工程师</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --tencent-green: #07C160;
-            --tencent-green-light: rgba(7, 193, 96, 0.1);
-            --tencent-green-gradient: linear-gradient(135deg, #07C160 0%, #00B43C 100%);
-            --tencent-blue: #0078D4;
-            --tencent-blue-gradient: linear-gradient(135deg, #0078D4 0%, #00A1D6 100%);
+            --tencent-green-dark: #059D4A;
+            --tencent-green-light: #E8F8ED;
+            --tencent-blue: #1E9EFF;
+            --tencent-red: #F5222D;
+            --tencent-orange: #FA8C16;
+            --tencent-purple: #722ED1;
+            --bg-dark: #0A0A0F;
+            --bg-card: #12121A;
+            --bg-card-hover: #1A1A25;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A0A0B0;
+            --border-color: rgba(255,255,255,0.08);
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
-            min-height: 100vh;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
         }
-        
-        /* 导航栏 */
-        .navbar {
-            background: var(--tencent-green-gradient) !important;
-            padding: 15px 0;
-            box-shadow: 0 2px 10px rgba(7, 193, 96, 0.3);
-        }
-        
-        .navbar-brand {
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: white !important;
-        }
-        
-        .nav-link {
-            color: rgba(255, 255, 255, 0.9) !important;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
-        
-        .nav-link:hover {
-            color: white !important;
-            transform: translateY(-2px);
-        }
-        
-        /* 英雄区域 */
-        .hero-section {
-            background: var(--tencent-green-gradient);
-            color: white;
-            padding: 100px 0 80px;
-            position: relative;
+
+        /* 背景粒子效果 */
+        .bg-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
             overflow: hidden;
         }
-        
-        .hero-section::before {
-            content: '';
+
+        .particle {
             position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 600px;
-            height: 600px;
-            background: rgba(255, 255, 255, 0.1);
+            width: 4px;
+            height: 4px;
+            background: var(--tencent-green);
             border-radius: 50%;
+            opacity: 0.3;
+            animation: float 20s infinite;
         }
-        
-        .hero-section::after {
-            content: '';
-            position: absolute;
-            bottom: -30%;
-            left: -10%;
-            width: 400px;
-            height: 400px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
+
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
         }
-        
-        .hero-content {
-            position: relative;
-            z-index: 1;
+
+        /* 导航栏 */
+        .navbar-tencent {
+            background: rgba(10, 10, 15, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
         }
-        
-        .tencent-badge {
-            margin-bottom: 20px;
+
+        .navbar-tencent.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 4px 30px rgba(7, 193, 96, 0.1);
         }
-        
-        .tencent-badge img {
-            height: 45px;
-            filter: brightness(0) invert(1);
-            opacity: 0.9;
-        }
-        
-        .avatar-container {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: white;
+
+        .nav-brand {
             display: flex;
             align-items: center;
-            justify-content: center;
-            margin: 0 auto 30px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 1.25rem;
         }
-        
-        .avatar-container i {
-            font-size: 80px;
+
+        .tencent-logo {
+            width: 40px;
+            height: 40px;
+            position: relative;
+        }
+
+        .tencent-logo svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .nav-link-custom {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-link-custom:hover, .nav-link-custom.active {
             color: var(--tencent-green);
         }
-        
-        .hero-section h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        
-        .hero-section .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-bottom: 20px;
-        }
-        
-        .contact-badges {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 30px;
-        }
-        
-        .contact-badge {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 8px 20px;
-            border-radius: 50px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s;
-        }
-        
-        .contact-badge:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-3px);
-        }
-        
-        /* 内容区域 */
-        .section {
-            padding: 80px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-            position: relative;
-        }
-        
-        .section-title h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #333;
-            display: inline-block;
-        }
-        
-        .section-title h2::after {
+
+        .nav-link-custom::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background: var(--tencent-green-gradient);
-            border-radius: 2px;
+            width: 0;
+            height: 2px;
+            background: var(--tencent-green);
+            transition: width 0.3s;
         }
-        
-        /* 关于我 */
-        .about-card {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-            height: 100%;
+
+        .nav-link-custom:hover::after, .nav-link-custom.active::after {
+            width: 60%;
         }
-        
-        .about-card h3 {
-            color: var(--tencent-green);
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-        
-        .about-item {
+
+        /* 英雄区域 */
+        .hero-section {
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            padding: 15px 0;
-            border-bottom: 1px solid #f0f0f0;
+            position: relative;
+            padding: 120px 0 80px;
+            overflow: hidden;
         }
-        
-        .about-item:last-child {
-            border-bottom: none;
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(7, 193, 96, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(30, 158, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 100%, rgba(7, 193, 96, 0.08) 0%, transparent 40%);
+            z-index: 1;
         }
-        
-        .about-item i {
-            font-size: 24px;
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(7, 193, 96, 0.1);
+            border: 1px solid rgba(7, 193, 96, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
             color: var(--tencent-green);
-            margin-right: 15px;
-            width: 40px;
-            text-align: center;
+            margin-bottom: 1.5rem;
         }
-        
-        .about-item-content h5 {
-            margin: 0;
-            color: #333;
+
+        .hero-badge i {
+            font-size: 1rem;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff 0%, #A0A0B0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, var(--tencent-green) 0%, #4ADE80 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .hero-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-info-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .hero-info-card:hover {
+            border-color: var(--tencent-green);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(7, 193, 96, 0.15);
+        }
+
+        .hero-info-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--tencent-green-light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            color: var(--tencent-green);
+            font-size: 1.25rem;
+        }
+
+        .hero-info-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-info-value {
+            font-size: 1.1rem;
             font-weight: 600;
         }
-        
-        .about-item-content p {
-            margin: 0;
-            color: #666;
-            font-size: 0.9rem;
-        }
-        
-        /* 项目卡片 */
-        .project-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-            transition: all 0.4s;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(7, 193, 96, 0.15);
-        }
-        
-        .project-header {
-            background: var(--tencent-green-gradient);
-            padding: 30px;
-            color: white;
-        }
-        
-        .project-header i {
-            font-size: 40px;
-            margin-bottom: 15px;
-        }
-        
-        .project-header h4 {
-            margin: 0;
-            font-weight: 700;
-        }
-        
-        .project-body {
-            padding: 30px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .project-tags {
+
+        .hero-contacts {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 20px;
+            gap: 1rem;
         }
-        
-        .project-tag {
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .contact-btn-primary {
+            background: var(--tencent-green);
+            color: #fff;
+        }
+
+        .contact-btn-primary:hover {
+            background: var(--tencent-green-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(7, 193, 96, 0.3);
+            color: #fff;
+        }
+
+        .contact-btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .contact-btn-outline:hover {
+            border-color: var(--tencent-green);
+            color: var(--tencent-green);
+        }
+
+        /* 腾讯吉祥物 */
+        .tencent-mascot {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .penguin-container {
+            position: relative;
+            width: 280px;
+            height: 280px;
+        }
+
+        .penguin-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(7, 193, 96, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+        }
+
+        .penguin-svg {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 20px 40px rgba(7, 193, 96, 0.3));
+            animation: float-penguin 4s ease-in-out infinite;
+        }
+
+        @keyframes float-penguin {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* 章节通用样式 */
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
             background: var(--tencent-green-light);
             color: var(--tencent-green);
-            padding: 4px 12px;
-            border-radius: 20px;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
             font-size: 0.8rem;
-            font-weight: 500;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        
-        .project-desc {
-            color: #666;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-        
-        .project-metrics {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 10px;
-        }
-        
-        .metric {
-            text-align: center;
-        }
-        
-        .metric-value {
-            font-size: 1.3rem;
+
+        .section-title {
+            font-size: 2.5rem;
             font-weight: 700;
-            color: var(--tencent-green);
+            margin-bottom: 1rem;
         }
-        
-        .metric-label {
-            font-size: 0.75rem;
-            color: #666;
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
         }
-        
-        .btn-outline-light {
-            border-color: rgba(255,255,255,0.8);
-            color: white;
-            margin-top: auto;
+
+        /* 教育背景 */
+        .edu-section {
+            background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-card) 100%);
         }
-        
-        .btn-outline-light:hover {
-            background: white;
-            color: var(--tencent-green);
-            border-color: white;
-        }
-        
-        /* 实习经历 */
-        .internship-card {
-            background: white;
+
+        .edu-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
             border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            padding: 2rem;
+            height: 100%;
+            transition: all 0.3s;
             position: relative;
             overflow: hidden;
         }
-        
-        .internship-card::before {
+
+        .edu-card::before {
             content: '';
             position: absolute;
-            left: 0;
             top: 0;
-            bottom: 0;
-            width: 5px;
-            background: var(--tencent-green-gradient);
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--tencent-green), var(--tencent-blue));
         }
-        
-        .internship-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
+
+        .edu-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--tencent-green);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
-        
-        .internship-icon {
+
+        .edu-icon {
             width: 60px;
             height: 60px;
             background: var(--tencent-green-light);
-            border-radius: 15px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 20px;
-        }
-        
-        .internship-icon i {
-            font-size: 30px;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
             color: var(--tencent-green);
         }
-        
-        .internship-title h4 {
-            margin: 0;
-            color: #333;
+
+        .edu-degree {
+            font-size: 1.5rem;
             font-weight: 700;
+            margin-bottom: 0.5rem;
         }
-        
-        .internship-title span {
+
+        .edu-school {
+            font-size: 1.1rem;
             color: var(--tencent-green);
+            margin-bottom: 1rem;
+        }
+
+        .edu-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .edu-detail {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* 项目卡片 */
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.4s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--tencent-green);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+        }
+
+        .project-header {
+            padding: 2rem;
+            position: relative;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .project-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--tencent-green) 0%, var(--tencent-blue) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-icon-orange {
+            background: linear-gradient(135deg, var(--tencent-orange) 0%, var(--tencent-red) 100%);
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            background: rgba(7, 193, 96, 0.1);
+            color: var(--tencent-green);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
             font-weight: 500;
         }
-        
-        .innovation-item {
+
+        .project-body {
+            padding: 2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-desc {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .project-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1.5rem 0;
+            flex: 1;
+        }
+
+        .project-features li {
             display: flex;
             align-items: flex-start;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
-        
-        .innovation-item i {
-            color: var(--tencent-green);
-            margin-right: 15px;
-            margin-top: 3px;
-        }
-        
-        .innovation-item h6 {
-            margin: 0 0 5px;
-            color: #333;
-            font-weight: 600;
-        }
-        
-        .innovation-item p {
-            margin: 0;
-            color: #666;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
             font-size: 0.9rem;
         }
-        
-        /* 技术技能 */
-        .skill-category {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-            height: 100%;
-        }
-        
-        .skill-category h4 {
+
+        .project-features li i {
             color: var(--tencent-green);
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            margin-top: 0.25rem;
+            flex-shrink: 0;
         }
-        
-        .skill-item {
-            display: flex;
-            align-items: center;
-            padding: 12px 15px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            transition: all 0.3s;
+
+        .project-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            padding: 1.5rem;
+            background: rgba(0,0,0,0.2);
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
         }
-        
-        .skill-item:hover {
-            background: var(--tencent-green-light);
-            transform: translateX(5px);
-        }
-        
-        .skill-name {
-            flex: 1;
-            font-weight: 500;
-            color: #333;
-        }
-        
-        .skill-level {
-            display: flex;
-            gap: 4px;
-        }
-        
-        .skill-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #ddd;
-        }
-        
-        .skill-dot.active {
-            background: var(--tencent-green);
-        }
-        
-        /* 页脚 */
-        footer {
-            background: #1a1a2e;
-            color: white;
-            padding: 40px 0;
+
+        .stat-item {
             text-align: center;
         }
-        
-        footer h5 {
-            margin-bottom: 20px;
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--tencent-green);
         }
-        
-        .social-links {
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .project-footer {
+            padding: 1.5rem 2rem;
+            border-top: 1px solid var(--border-color);
             display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 20px;
+            gap: 1rem;
         }
-        
-        .social-link {
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .project-link-primary {
+            background: var(--tencent-green);
+            color: #fff;
+        }
+
+        .project-link-primary:hover {
+            background: var(--tencent-green-dark);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .project-link-outline {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .project-link-outline:hover {
+            border-color: var(--tencent-green);
+            color: var(--tencent-green);
+        }
+
+        /* 学术研究 */
+        .research-section {
+            background: var(--bg-card);
+        }
+
+        .research-card {
+            background: linear-gradient(135deg, rgba(7, 193, 96, 0.05) 0%, rgba(30, 158, 255, 0.05) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .research-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--tencent-green), var(--tencent-blue), var(--tencent-purple));
+        }
+
+        .research-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .research-icon {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, var(--tencent-green) 0%, var(--tencent-blue) 100%);
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 20px;
+            font-size: 2rem;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .research-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .research-journal {
+            color: var(--tencent-green);
+            font-weight: 500;
+        }
+
+        .research-desc {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .research-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .result-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .result-arrow {
+            color: var(--tencent-green);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-old {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-decoration: line-through;
+        }
+
+        .result-new {
+            color: var(--tencent-green);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .result-label {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .research-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: var(--tencent-green);
+            color: #fff;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
             transition: all 0.3s;
         }
-        
-        .social-link:hover {
-            background: var(--tencent-green);
-            transform: translateY(-5px);
-            color: white;
+
+        .research-link:hover {
+            background: var(--tencent-green-dark);
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(7, 193, 96, 0.3);
         }
-        
+
+        /* 技能展示 */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .skill-card:hover {
+            border-color: var(--tencent-green);
+            transform: translateY(-5px);
+        }
+
+        .skill-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--tencent-green-light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--tencent-green);
+            font-size: 1.25rem;
+        }
+
+        .skill-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .skill-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+
+        .skill-tag:hover {
+            border-color: var(--tencent-green);
+            background: var(--tencent-green-light);
+        }
+
+        /* 页脚 */
+        .footer {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            text-align: center;
+        }
+
+        .footer-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .footer-link:hover {
+            border-color: var(--tencent-green);
+            color: var(--tencent-green);
+            background: var(--tencent-green-light);
+        }
+
+        .footer-copyright {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
         /* 动画 */
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.6s ease-out;
         }
-        
+
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
         }
-        
+
         /* 响应式 */
-        @media (max-width: 768px) {
+        @media (max-width: 992px) {
             .hero-section {
-                padding: 60px 0;
+                padding: 100px 0 60px;
             }
             
-            .hero-section h1 {
-                font-size: 1.8rem;
+            .penguin-container {
+                width: 200px;
+                height: 200px;
+                margin-top: 3rem;
             }
             
             .section {
-                padding: 50px 0;
+                padding: 60px 0;
             }
             
-            .section-title h2 {
-                font-size: 1.5rem;
+            .section-title {
+                font-size: 2rem;
             }
         }
-        
-        /* 滚动条 */
+
+        @media (max-width: 768px) {
+            .hero-info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-contacts {
+                flex-direction: column;
+            }
+            
+            .contact-btn {
+                justify-content: center;
+            }
+            
+            .project-footer {
+                flex-direction: column;
+            }
+            
+            .research-header {
+                flex-direction: column;
+            }
+        }
+
+        /* 滚动条美化 */
         ::-webkit-scrollbar {
             width: 8px;
         }
-        
+
         ::-webkit-scrollbar-track {
-            background: #f1f1f1;
+            background: var(--bg-dark);
         }
-        
+
         ::-webkit-scrollbar-thumb {
             background: var(--tencent-green);
             border-radius: 4px;
@@ -544,108 +935,204 @@
     </style>
 </head>
 <body>
+    <!-- 背景粒子 -->
+    <div class="bg-particles" id="particles"></div>
+
     <!-- 导航栏 -->
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <nav class="navbar-tencent" id="navbar">
         <div class="container">
-            <a class="navbar-brand" href="#">
-                <i class="bi bi-tencent-qq me-2"></i>唐语哲 · 求职主页
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#about">关于我</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#projects">项目</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#experience">实习</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#skills">技能</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">联系</a></li>
-                </ul>
+            <div class="d-flex justify-content-between align-items-center w-100">
+                <a href="#" class="nav-brand">
+                    <div class="tencent-logo">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="20" cy="20" r="18" fill="#07C160"/>
+                            <path d="M20 8C14 8 10 12.5 10 18C10 21.5 11.5 24.5 14 26.5L13 32L20 29L27 32L26 26.5C28.5 24.5 30 21.5 30 18C30 12.5 26 8 20 8Z" fill="white"/>
+                            <circle cx="16" cy="16" r="2" fill="#07C160"/>
+                            <circle cx="24" cy="16" r="2" fill="#07C160"/>
+                            <path d="M17 21C17 21 18.5 23 20 23C21.5 23 23 21 23 21" stroke="#07C160" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <span>Yuze Tang</span>
+                </a>
+                <div class="d-none d-lg-flex align-items-center gap-4">
+                    <a href="#about" class="nav-link-custom">关于我</a>
+                    <a href="#education" class="nav-link-custom">教育背景</a>
+                    <a href="#projects" class="nav-link-custom">核心项目</a>
+                    <a href="#research" class="nav-link-custom">学术研究</a>
+                    <a href="#skills" class="nav-link-custom">技术技能</a>
+                    <a href="#contact" class="nav-link-custom">联系我</a>
+                </div>
             </div>
         </div>
     </nav>
 
     <!-- 英雄区域 -->
     <section class="hero-section">
+        <div class="hero-bg"></div>
         <div class="container">
-            <div class="hero-content text-center">
-                <div class="tencent-badge mb-4">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Tencent_logo.svg/200px-Tencent_logo.svg.png" 
-                         alt="腾讯">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <div class="hero-badge">
+                        <i class="bi bi-geo-alt-fill"></i>
+                        电子科技大学 · 成都
+                    </div>
+                    <h1 class="hero-title">
+                        你好，我是<span>唐语哲</span><br>
+                        Yuze Tang
+                    </h1>
+                    <p class="hero-subtitle">
+                        电子科技大学（985）电子信息硕士，专注 <strong>Java后端开发</strong> 与 <strong>AI应用开发</strong>，
+                        具备扎实的计算机系统基础，熟悉Spring生态、分布式系统设计与大模型应用。
+                    </p>
+
+                    <div class="hero-info-grid">
+                        <div class="hero-info-card">
+                            <div class="hero-info-icon">
+                                <i class="bi bi-mortarboard"></i>
+                            </div>
+                            <div class="hero-info-label">学历</div>
+                            <div class="hero-info-value">硕士 · 电子科技大学</div>
+                        </div>
+                        <div class="hero-info-card">
+                            <div class="hero-info-icon">
+                                <i class="bi bi-code-slash"></i>
+                            </div>
+                            <div class="hero-info-label">方向</div>
+                            <div class="hero-info-value">Java后端 + AI应用</div>
+                        </div>
+                        <div class="hero-info-card">
+                            <div class="hero-info-icon">
+                                <i class="bi bi-calendar3"></i>
+                            </div>
+                            <div class="hero-info-label">毕业时间</div>
+                            <div class="hero-info-value">2027年6月</div>
+                        </div>
+                        <div class="hero-info-card">
+                            <div class="hero-info-icon">
+                                <i class="bi bi-github"></i>
+                            </div>
+                            <div class="hero-info-label">GitHub</div>
+                            <div class="hero-info-value">@yikuaihaimian</div>
+                        </div>
+                    </div>
+
+                    <div class="hero-contacts">
+                        <a href="mailto:tyz1388@163.com" class="contact-btn contact-btn-primary">
+                            <i class="bi bi-envelope-fill"></i>
+                            tyz1388@163.com
+                        </a>
+                        <a href="https://github.com/yikuaihaimian" target="_blank" class="contact-btn contact-btn-outline">
+                            <i class="bi bi-github"></i>
+                            GitHub
+                        </a>
+                    </div>
                 </div>
-                <div class="avatar-container">
-                    <i class="bi bi-person-fill"></i>
-                </div>
-                <h1>唐语哲 (Yuze Tang)</h1>
-                <p class="subtitle">电子科技大学 · 电子信息硕士 · 后端开发工程师</p>
-                <p class="lead" style="opacity: 0.9;">专注 Java后端开发 + AI应用开发 | Spring生态 | 大模型应用</p>
-                
-                <div class="contact-badges">
-                    <a href="mailto:tyz1388@163.com" class="contact-badge text-white text-decoration-none">
-                        <i class="bi bi-envelope-fill"></i>
-                        tyz1388@163.com
-                    </a>
-                    <span class="contact-badge text-white">
-                        <i class="bi bi-wechat"></i>
-                        T15090851388
-                    </span>
-                    <span class="contact-badge text-white">
-                        <i class="bi bi-phone-fill"></i>
-                        150-9085-1388
-                    </span>
+                <div class="col-lg-6 d-flex justify-content-center">
+                    <div class="tencent-mascot">
+                        <div class="penguin-container">
+                            <div class="penguin-glow"></div>
+                            <svg class="penguin-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- 腾讯企鹅/Tencent Mascot -->
+                                <ellipse cx="100" cy="130" rx="60" ry="55" fill="#07C160"/>
+                                <ellipse cx="100" cy="135" rx="45" ry="40" fill="#FFFFFF"/>
+                                <!-- 围巾 -->
+                                <path d="M55 115 Q100 130 145 115 L150 125 Q100 145 50 125 Z" fill="#FA8C16"/>
+                                <path d="M55 115 Q100 130 145 115 L150 125 Q100 145 50 125 Z" fill="url(#scarfGradient)"/>
+                                <rect x="145" y="115" width="12" height="40" rx="4" fill="#FA8C16"/>
+                                <!-- 眼睛 -->
+                                <ellipse cx="80" cy="105" rx="12" ry="14" fill="#FFFFFF"/>
+                                <ellipse cx="120" cy="105" rx="12" ry="14" fill="#FFFFFF"/>
+                                <circle cx="82" cy="107" r="6" fill="#1A1A25"/>
+                                <circle cx="122" cy="107" r="6" fill="#1A1A25"/>
+                                <circle cx="84" cy="105" r="2" fill="#FFFFFF"/>
+                                <circle cx="124" cy="105" r="2" fill="#FFFFFF"/>
+                                <!-- 嘴巴 -->
+                                <ellipse cx="100" cy="128" rx="8" ry="5" fill="#FF6B35"/>
+                                <!-- 腮红 -->
+                                <ellipse cx="65" cy="118" rx="8" ry="5" fill="#FFB7C5" opacity="0.6"/>
+                                <ellipse cx="135" cy="118" rx="8" ry="5" fill="#FFB7C5" opacity="0.6"/>
+                                <!-- 翅膀 -->
+                                <ellipse cx="42" cy="135" rx="15" ry="25" fill="#059D4A" transform="rotate(-15 42 135)"/>
+                                <ellipse cx="158" cy="135" rx="15" ry="25" fill="#059D4A" transform="rotate(15 158 135)"/>
+                                <!-- 脚 -->
+                                <ellipse cx="75" cy="180" rx="18" ry="8" fill="#FF6B35"/>
+                                <ellipse cx="125" cy="180" rx="18" ry="8" fill="#FF6B35"/>
+                                <!-- 腾讯Logo -->
+                                <text x="100" y="150" text-anchor="middle" font-size="16" font-weight="bold" fill="#07C160">Tencent</text>
+                                <defs>
+                                    <linearGradient id="scarfGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" style="stop-color:#FA8C16"/>
+                                        <stop offset="50%" style="stop-color:#FF6B35"/>
+                                        <stop offset="100%" style="stop-color:#FA8C16"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 关于我 -->
-    <section id="about" class="section">
+    <!-- 教育背景 -->
+    <section class="section edu-section" id="education">
         <div class="container">
-            <div class="section-title">
-                <h2>关于我</h2>
+            <div class="section-header fade-in">
+                <div class="section-badge">
+                    <i class="bi bi-mortarboard-fill"></i>
+                    Education
+                </div>
+                <h2 class="section-title">教育背景</h2>
+                <p class="section-subtitle">扎实的学术基础，985高校硕博连读</p>
             </div>
+
             <div class="row g-4">
-                <div class="col-md-6">
-                    <div class="about-card fade-in">
-                        <h3><i class="bi bi-mortarboard-fill me-2"></i>教育背景</h3>
-                        <div class="about-item">
-                            <i class="bi bi-journal-richtext"></i>
-                            <div class="about-item-content">
-                                <h5>电子科技大学（985）</h5>
-                                <p>电子信息 · 硕士 · 2024.09 - 2027.06</p>
-                            </div>
+                <div class="col-md-6 fade-in">
+                    <div class="edu-card">
+                        <div class="edu-icon">
+                            <i class="bi bi-patch-check-fill"></i>
                         </div>
-                        <div class="about-item">
-                            <i class="bi bi-journal"></i>
-                            <div class="about-item-content">
-                                <h5>中国农业大学（985）</h5>
-                                <p>电子信息工程 · 本科 · 2020.09 - 2024.06</p>
+                        <div class="edu-degree">硕士研究生</div>
+                        <div class="edu-school">
+                            <i class="bi bi-star-fill"></i> 电子科技大学（985）
+                        </div>
+                        <div class="edu-details">
+                            <div class="edu-detail">
+                                <i class="bi bi-book"></i>
+                                <span>电子信息</span>
+                            </div>
+                            <div class="edu-detail">
+                                <i class="bi bi-calendar"></i>
+                                <span>2024.09 - 2027.06</span>
+                            </div>
+                            <div class="edu-detail">
+                                <i class="bi bi-geo-alt"></i>
+                                <span>四川 · 成都</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="about-card fade-in">
-                        <h3><i class="bi bi-lightbulb-fill me-2"></i>个人优势</h3>
-                        <div class="about-item">
-                            <i class="bi bi-cpu"></i>
-                            <div class="about-item-content">
-                                <h5>扎实的技术基础</h5>
-                                <p>Java后端 + AI应用开发，熟悉Spring生态</p>
-                            </div>
+                <div class="col-md-6 fade-in">
+                    <div class="edu-card">
+                        <div class="edu-icon">
+                            <i class="bi bi-patch-check"></i>
                         </div>
-                        <div class="about-item">
-                            <i class="bi bi-graph-up-arrow"></i>
-                            <div class="about-item-content">
-                                <h5>AI领域深入实践</h5>
-                                <p>RAG系统、多模态智能体、大模型应用开发</p>
-                            </div>
+                        <div class="edu-degree">学士</div>
+                        <div class="edu-school">
+                            <i class="bi bi-star-fill"></i> 中国农业大学（985）
                         </div>
-                        <div class="about-item">
-                            <i class="bi bi-award-fill"></i>
-                            <div class="about-item-content">
-                                <h5>学术研究能力</h5>
-                                <p>SCI论文在投，智能优化算法方向</p>
+                        <div class="edu-details">
+                            <div class="edu-detail">
+                                <i class="bi bi-book"></i>
+                                <span>电子信息工程</span>
+                            </div>
+                            <div class="edu-detail">
+                                <i class="bi bi-calendar"></i>
+                                <span>2020.09 - 2024.06</span>
+                            </div>
+                            <div class="edu-detail">
+                                <i class="bi bi-geo-alt"></i>
+                                <span>北京</span>
                             </div>
                         </div>
                     </div>
@@ -655,202 +1142,157 @@
     </section>
 
     <!-- 核心项目 -->
-    <section id="projects" class="section" style="background: #f8f9fa;">
+    <section class="section" id="projects">
         <div class="container">
-            <div class="section-title">
-                <h2>核心项目</h2>
-            </div>
-            <div class="row g-4">
-                <!-- 项目1：心理咨询Agent -->
-                <div class="col-lg-6">
-                    <div class="project-card fade-in">
-                        <div class="project-header">
-                            <i class="bi bi-robot"></i>
-                            <h4>多模态智心Agent智能体</h4>
-                            <small>心理咨询AI助手</small>
-                        </div>
-                        <div class="project-body">
-                            <div class="project-tags">
-                                <span class="project-tag">SpringAI</span>
-                                <span class="project-tag">RAG</span>
-                                <span class="project-tag">多模态</span>
-                                <span class="project-tag">MCP</span>
-                                <span class="project-tag">LoRA微调</span>
-                            </div>
-                            <p class="project-desc">
-                                基于SpringAI构建的多模态心理关怀智能体，通过多模态感知、Agentic RAG与MCP外部服务联动，实现情绪识别、心理咨询、风险预警、自动干预的完整业务闭环。
-                            </p>
-                            <div class="project-metrics">
-                                <div class="metric">
-                                    <div class="metric-value">90%</div>
-                                    <div class="metric-label">情绪识别准确率</div>
-                                </div>
-                                <div class="metric">
-                                    <div class="metric-value">98%</div>
-                                    <div class="metric-label">预警送达率</div>
-                                </div>
-                                <div class="metric">
-                                    <div class="metric-value">50+</div>
-                                    <div class="metric-label">并发测试用户</div>
-                                </div>
-                                <div class="metric">
-                                    <div class="metric-value"><200ms</div>
-                                    <div class="metric-label">响应时间</div>
-                                </div>
-                            </div>
-                            <a href="https://github.com/yikuaihaimian/psychological-agent" 
-                               target="_blank" 
-                               class="btn btn-outline-light w-100 mt-3">
-                                <i class="bi bi-github me-2"></i>查看项目详情
-                            </a>
-                        </div>
-                    </div>
+            <div class="section-header fade-in">
+                <div class="section-badge">
+                    <i class="bi bi-rocket-takeoff-fill"></i>
+                    Projects
                 </div>
-                
-                <!-- 项目2：StreamCore -->
-                <div class="col-lg-6">
-                    <div class="project-card fade-in">
-                        <div class="project-header">
-                            <i class="bi bi-play-circle-fill"></i>
-                            <h4>StreamCore 泛娱乐平台</h4>
-                            <small>短视频与直播互动平台</small>
-                        </div>
-                        <div class="project-body">
-                            <div class="project-tags">
-                                <span class="project-tag">SpringCloud</span>
-                                <span class="project-tag">Redis</span>
-                                <span class="project-tag">RabbitMQ</span>
-                                <span class="project-tag">AI交互</span>
-                            </div>
-                            <p class="project-desc">
-                                支撑海量用户的泛娱乐短视频与直播互动平台，实现高并发视频流转、直播间营销秒杀、创作者海量数据调度及基于大模型的智能交互闭环。
-                            </p>
-                            <div class="project-metrics">
-                                <div class="metric">
-                                    <div class="metric-value">10万+</div>
-                                    <div class="metric-label">注册用户</div>
-                                </div>
-                                <div class="metric">
-                                    <div class="metric-value">2万+</div>
-                                    <div class="metric-label">DAU</div>
-                                </div>
-                                <div class="metric">
-                                    <div class="metric-value">500+</div>
-                                    <div class="metric-label">同时在线</div>
-                                </div>
-                                <div class="metric">
-                                    <div class="metric-value">99.5%</div>
-                                    <div class="metric-label">系统可用性</div>
-                                </div>
-                            </div>
-                            <a href="https://github.com/yikuaihaimian/streamcore" 
-                               target="_blank" 
-                               class="btn btn-outline-light w-100 mt-3">
-                                <i class="bi bi-github me-2"></i>查看项目详情
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <h2 class="section-title">核心项目</h2>
+                <p class="section-subtitle">深入实践的技术项目，涵盖后端开发与AI应用</p>
             </div>
-        </div>
-    </section>
 
-    <!-- 实习经历 -->
-    <section id="experience" class="section">
-        <div class="container">
-            <div class="section-title">
-                <h2>实习经历</h2>
-            </div>
             <div class="row g-4">
-                <!-- 腾讯实习 -->
-                <div class="col-lg-6">
-                    <div class="internship-card fade-in">
-                        <div class="internship-header">
-                            <div class="internship-icon" style="background: linear-gradient(135deg, #07C160 0%, #00B43C 100%);">
-                                <i class="bi bi-tencent-qq" style="color: white;"></i>
+                <!-- 项目一：多模态智心Agent -->
+                <div class="col-lg-6 fade-in">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-icon">
+                                <i class="bi bi-heart-pulse"></i>
                             </div>
-                            <div class="internship-title">
-                                <h4>腾讯 · 后台开发实习生</h4>
-                                <span>2025.06 - 2025.09 · CSIG</span>
-                            </div>
-                        </div>
-                        
-                        <div class="innovation-item">
-                            <i class="bi bi-check-circle-fill"></i>
-                            <div>
-                                <h6>企业微信机器人开发</h6>
-                                <p>基于Spring Boot开发企业微信消息推送机器人，日均处理10万+消息推送</p>
+                            <h3 class="project-title">多模态智心Agent智能体</h3>
+                            <div class="project-tech">
+                                <span class="tech-tag">SpringAI</span>
+                                <span class="tech-tag">RAG</span>
+                                <span class="tech-tag">MCP</span>
+                                <span class="tech-tag">LoRA微调</span>
+                                <span class="tech-tag">多模态</span>
                             </div>
                         </div>
-                        
-                        <div class="innovation-item">
-                            <i class="bi bi-check-circle-fill"></i>
-                            <div>
-                                <h6>微服务架构优化</h6>
-                                <p>参与重构订单服务模块，采用Redis缓存+QMQ消息队列提升系统吞吐量</p>
+                        <div class="project-body">
+                            <p class="project-desc">
+                                基于SpringAI构建的多模态心理关怀智能体，通过多模态感知、Agentic RAG与MCP外部服务联动，
+                                实现情绪识别、心理咨询、风险预警、自动干预的完整业务闭环。
+                            </p>
+                            <ul class="project-features">
+                                <li>
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    <span><strong>SpringAI原生技术栈</strong> — Java后端对接大模型，面试加分项</span>
+                                </li>
+                                <li>
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    <span><strong>多模态感知</strong> — 语音+图像+文本融合，情绪识别准确率90%</span>
+                                </li>
+                                <li>
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    <span><strong>Agentic RAG</strong> — 比普通RAG更强的知识检索能力</span>
+                                </li>
+                                <li>
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    <span><strong>高风险自动预警</strong> — 邮件送达率98%，保障学生安全</span>
+                                </li>
+                            </ul>
+                            <div class="project-stats">
+                                <div class="stat-item">
+                                    <div class="stat-value">90%</div>
+                                    <div class="stat-label">情绪识别准确率</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">98%</div>
+                                    <div class="stat-label">预警送达率</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">1000+</div>
+                                    <div class="stat-label">并发用户</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">&lt;200ms</div>
+                                    <div class="stat-label">流式响应</div>
+                                </div>
                             </div>
                         </div>
-                        
-                        <div class="innovation-item">
-                            <i class="bi bi-check-circle-fill"></i>
-                            <div>
-                                <h6>数据可视化平台</h6>
-                                <p>基于ECharts开发数据大屏，实时展示业务核心指标</p>
-                            </div>
+                        <div class="project-footer">
+                            <a href="https://github.com/yikuaihaimian/psych-agent" target="_blank" class="project-link project-link-primary">
+                                <i class="bi bi-github"></i>
+                                查看源码
+                            </a>
+                            <a href="https://github.com/yikuaihaimian/psych-agent" target="_blank" class="project-link project-link-outline">
+                                <i class="bi bi-file-text"></i>
+                                详细文档
+                            </a>
                         </div>
-                        
-                        <a href="https://github.com/yikuaihaimian/tencent-internship" 
-                           target="_blank" 
-                           class="btn mt-3" 
-                           style="background: linear-gradient(135deg, #07C160 0%, #00B43C 100%); color: white;">
-                            <i class="bi bi-github me-2"></i>查看实习项目
-                        </a>
                     </div>
                 </div>
-                
-                <!-- 字节实习 -->
-                <div class="col-lg-6">
-                    <div class="internship-card fade-in">
-                        <div class="internship-header">
-                            <div class="internship-icon" style="background: linear-gradient(135deg, #FE2C55 0%, #25F4EE 100%);">
-                                <i class="bi bi-tiktok" style="color: white;"></i>
+
+                <!-- 项目二：StreamCore -->
+                <div class="col-lg-6 fade-in">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-icon project-icon-orange">
+                                <i class="bi bi-play-circle"></i>
                             </div>
-                            <div class="internship-title">
-                                <h4>字节跳动 · 后台开发实习生</h4>
-                                <span>2024.12 - 2025.03 · 电商部门</span>
-                            </div>
-                        </div>
-                        
-                        <div class="innovation-item">
-                            <i class="bi bi-check-circle-fill"></i>
-                            <div>
-                                <h6>商品搜索服务优化</h6>
-                                <p>参与搜索服务开发，使用ES集群实现商品全文检索，QPS提升40%</p>
+                            <h3 class="project-title">StreamCore 泛娱乐内容生态平台</h3>
+                            <div class="project-tech">
+                                <span class="tech-tag">SpringCloud</span>
+                                <span class="tech-tag">Redis</span>
+                                <span class="tech-tag">RabbitMQ</span>
+                                <span class="tech-tag">SpringAI</span>
+                                <span class="tech-tag">高并发</span>
                             </div>
                         </div>
-                        
-                        <div class="innovation-item">
-                            <i class="bi bi-check-circle-fill"></i>
-                            <div>
-                                <h6>订单链路优化</h6>
-                                <p>分析订单超时扣减库存问题，引入RocketMQ延迟消息优化库存回滚逻辑</p>
+                        <div class="project-body">
+                            <p class="project-desc">
+                                一款支撑海量用户的泛娱乐短视频与直播互动平台，核心实现高并发视频流转、
+                                直播间营销秒杀、创作者数据调度及基于大模型的智能交互闭环。
+                            </p>
+                            <ul class="project-features">
+                                <li>
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    <span><strong>高并发架构</strong> — Redis合并写请求+延迟队列，支持10万+ QPS</span>
+                                </li>
+                                <li>
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    <span><strong>秒杀系统</strong> — 乐观锁+分布式锁，零超发保障</span>
+                                </li>
+                                <li>
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    <span><strong>VIP兑换码</strong> — 按位加权算法+BitMap，千万级数据验证</span>
+                                </li>
+                                <li>
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    <span><strong>AI智能交互</strong> — 阿里云百炼+Function Calling</span>
+                                </li>
+                            </ul>
+                            <div class="project-stats">
+                                <div class="stat-item">
+                                    <div class="stat-value">1000万+</div>
+                                    <div class="stat-label">注册用户</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">50万+</div>
+                                    <div class="stat-label">同时在线</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">10万+</div>
+                                    <div class="stat-label">视频QPS</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">99.9%</div>
+                                    <div class="stat-label">系统可用性</div>
+                                </div>
                             </div>
                         </div>
-                        
-                        <div class="innovation-item">
-                            <i class="bi bi-check-circle-fill"></i>
-                            <div>
-                                <h6>接口性能优化</h6>
-                                <p>分析热点接口耗时，采用本地缓存+分布式缓存二级缓存策略降低DB压力</p>
-                            </div>
+                        <div class="project-footer">
+                            <a href="https://github.com/yikuaihaimian/streamcore" target="_blank" class="project-link project-link-primary">
+                                <i class="bi bi-github"></i>
+                                查看源码
+                            </a>
+                            <a href="https://github.com/yikuaihaimian/streamcore" target="_blank" class="project-link project-link-outline">
+                                <i class="bi bi-file-text"></i>
+                                详细文档
+                            </a>
                         </div>
-                        
-                        <a href="https://github.com/yikuaihaimian/bytedance-internship" 
-                           target="_blank" 
-                           class="btn mt-3" 
-                           style="background: linear-gradient(135deg, #FE2C55 0%, #25F4EE 100%); color: white;">
-                            <i class="bi bi-github me-2"></i>查看实习项目
-                        </a>
                     </div>
                 </div>
             </div>
@@ -858,56 +1300,191 @@
     </section>
 
     <!-- 学术研究 -->
-    <section id="research" class="section" style="background: #f8f9fa;">
+    <section class="section research-section" id="research">
         <div class="container">
-            <div class="section-title">
-                <h2>学术研究</h2>
+            <div class="section-header fade-in">
+                <div class="section-badge">
+                    <i class="bi bi-lightbulb-fill"></i>
+                    Research
+                </div>
+                <h2 class="section-title">学术研究</h2>
+                <p class="section-subtitle">航空制造领域的智能优化算法研究</p>
             </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="internship-card fade-in">
-                        <div class="internship-header">
-                            <div class="internship-icon">
-                                <i class="bi bi-airplane-engines-fill"></i>
-                            </div>
-                            <div class="internship-title">
-                                <h4>航空制造中的智能优化算法研究</h4>
-                                <span>《航空学报》审稿中 · EI收录</span>
-                            </div>
+
+            <div class="research-card fade-in">
+                <div class="research-header">
+                    <div class="research-icon">
+                        <i class="bi bi-robot"></i>
+                    </div>
+                    <div>
+                        <h3 class="research-title">融合高保真预测与Agent-MOEA/D的复杂曲面喷涂轨迹控制方法</h3>
+                        <div class="research-journal">
+                            <i class="bi bi-journal-text"></i>
+                            《航空学报》（中文核心期刊，EI收录）— 审稿中
                         </div>
-                        
-                        <h5 class="mb-3" style="color: var(--tencent-green);">
-                            <i class="bi bi-file-earmark-text me-2"></i>论文标题
-                        </h5>
-                        <p class="mb-4" style="color: #333; font-weight: 500;">
-                            《融合高保真预测与Agent-MOEA/D的复杂曲面喷涂轨迹控制方法》
-                        </p>
-                        
-                        <h5 class="mb-3" style="color: var(--tencent-green);">
-                            <i class="bi bi-lightbulb me-2"></i>技术创新点
-                        </h5>
-                        
-                        <div class="innovation-item">
-                            <i class="bi bi-check-circle-fill"></i>
-                            <div>
-                                <h6>Agent-MOEA/D双层协同架构</h6>
-                                <p>LLM Agent作为顶层元控制器，动态下发进化策略</p>
-                            </div>
+                    </div>
+                </div>
+
+                <p class="research-desc">
+                    针对大型客机舱门等大曲率航空构件自动化喷涂存在的漆膜厚度一致性差、机械臂易引发运动奇异、
+                    航空涂料浪费严重等技术难题，提出一种融合高保真厚度预测与大语言模型智能体（Agent）驱动
+                    多目标分解进化算法（Agent-MOEA/D）的喷涂轨迹协同优化方法。
+                </p>
+
+                <div class="research-results">
+                    <div class="result-item">
+                        <div class="result-arrow">↓ 53.3%</div>
+                        <div class="result-label">漆膜厚度标准差</div>
+                        <div class="result-old">15.2 μm</div>
+                        <div class="result-new">7.1 μm</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-arrow">↓ 24.5%</div>
+                        <div class="result-label">涂料消耗</div>
+                        <div class="result-old">1598.5 g</div>
+                        <div class="result-new">1206.7 g</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-arrow">↓ 76%</div>
+                        <div class="result-label">预测误差</div>
+                        <div class="result-old">&gt;40%</div>
+                        <div class="result-new">&lt;10%</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-arrow">↑ 23%</div>
+                        <div class="result-label">HV指标</div>
+                        <div class="result-new">超体积提升</div>
+                    </div>
+                </div>
+
+                <a href="https://github.com/yikuaihaimian/agent-moead" target="_blank" class="research-link">
+                    <i class="bi bi-github"></i>
+                    查看源代码与论文详情
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技术技能 -->
+    <section class="section" id="skills">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-badge">
+                    <i class="bi bi-tools"></i>
+                    Skills
+                </div>
+                <h2 class="section-title">技术技能</h2>
+                <p class="section-subtitle">扎实的技术栈与实践经验</p>
+            </div>
+
+            <div class="skills-grid fade-in">
+                <!-- 后端开发 -->
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon">
+                            <i class="bi bi-code-square"></i>
                         </div>
-                        
-                        <div class="innovation-item">
-                            <i class="bi bi-check-circle-fill"></i>
-                            <div>
-                                <h6>高保真度厚度预测模型</h6>
-                                <p>引入姿态耦合矩阵，曲率极值区预测误差削减76%</p>
-                            </div>
+                        <div class="skill-title">后端开发</div>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag"><i class="bi bi-braces"></i> Java</span>
+                        <span class="skill-tag"><i class="bi bi-braces"></i> Python</span>
+                        <span class="skill-tag"><i class="bi bi-flower1"></i> Spring</span>
+                        <span class="skill-tag"><i class="bi bi-flower1"></i> SpringBoot</span>
+                        <span class="skill-tag"><i class="bi bi-database"></i> MySQL</span>
+                        <span class="skill-tag"><i class="bi bi-database"></i> Redis</span>
+                        <span class="skill-tag"><i class="bi bi-diagram-3"></i> RabbitMQ</span>
+                        <span class="skill-tag"><i class="bi bi-diagram-3"></i> RocketMQ</span>
+                        <span class="skill-tag"><i class="bi bi-cloud"></i> SpringCloud</span>
+                        <span class="skill-tag"><i class="bi bi-cloud"></i> Nacos</span>
+                    </div>
+                </div>
+
+                <!-- AI应用开发 -->
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon">
+                            <i class="bi bi-robot"></i>
                         </div>
-                        
-                        <a href="https://github.com/yikuaihaimian/agent-moea" 
-                           target="_blank" 
-                           class="btn mt-3" 
-                           style="background: var(--tencent-green-gradient); color: white;">
-                            <i class="bi bi-github me-2"></i>查看研究代码
+                        <div class="skill-title">AI应用开发</div>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag"><i class="bi bi-cpu"></i> SpringAI</span>
+                        <span class="skill-tag"><i class="bi bi-cpu"></i> LangChain4j</span>
+                        <span class="skill-tag"><i class="bi bi-box"></i> Ollama</span>
+                        <span class="skill-tag"><i class="bi bi-box"></i> OpenAI</span>
+                        <span class="skill-tag"><i class="bi bi-box"></i> DeepSeek</span>
+                        <span class="skill-tag"><i class="bi bi-vector-pen"></i> Chroma</span>
+                        <span class="skill-tag"><i class="bi bi-vector-pen"></i> Milvus</span>
+                        <span class="skill-tag"><i class="bi bi-arrow-repeat"></i> RAG</span>
+                        <span class="skill-tag"><i class="bi bi-plug"></i> MCP协议</span>
+                        <span class="skill-tag"><i class="bi bi-gear"></i> LoRA微调</span>
+                    </div>
+                </div>
+
+                <!-- 工具与平台 -->
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon">
+                            <i class="bi bi-tools"></i>
+                        </div>
+                        <div class="skill-title">工具与平台</div>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag"><i class="bi bi-git"></i> Git</span>
+                        <span class="skill-tag"><i class="bi bi-box-seam"></i> Docker</span>
+                        <span class="skill-tag"><i class="bi bi-terminal"></i> Linux</span>
+                        <span class="skill-tag"><i class="bi bi-lightning-charge"></i> IntelliJ IDEA</span>
+                        <span class="skill-tag"><i class="bi bi-umbrella"></i> Maven</span>
+                        <span class="skill-tag"><i class="bi bi-robot"></i> RobotStudio</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 证书 -->
+            <div class="mt-5 text-center fade-in">
+                <div class="d-inline-flex gap-3 flex-wrap justify-content-center">
+                    <span class="badge" style="background: var(--tencent-green); padding: 0.75rem 1.5rem; font-size: 0.9rem; border-radius: 50px;">
+                        <i class="bi bi-translate me-2"></i>英语六级 546分
+                    </span>
+                    <span class="badge" style="background: rgba(255,255,255,0.1); padding: 0.75rem 1.5rem; font-size: 0.9rem; border-radius: 50px; border: 1px solid var(--border-color);">
+                        <i class="bi bi-cpu me-2"></i>计算机专业基础扎实
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我 -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-badge">
+                    <i class="bi bi-chat-heart-fill"></i>
+                    Contact
+                </div>
+                <h2 class="section-title">联系我</h2>
+                <p class="section-subtitle">期待与您交流合作</p>
+            </div>
+
+            <div class="row justify-content-center fade-in">
+                <div class="col-lg-8">
+                    <div class="d-flex flex-wrap justify-content-center gap-4">
+                        <a href="mailto:tyz1388@163.com" class="footer-link" style="padding: 1rem 2rem;">
+                            <i class="bi bi-envelope-fill" style="color: var(--tencent-red);"></i>
+                            tyz1388@163.com
+                        </a>
+                        <a href="#" class="footer-link" style="padding: 1rem 2rem;">
+                            <i class="bi bi-wechat" style="color: var(--tencent-green);"></i>
+                            T15090851388
+                        </a>
+                        <a href="#" class="footer-link" style="padding: 1rem 2rem;">
+                            <i class="bi bi-telephone-fill" style="color: var(--tencent-blue);"></i>
+                            15090851388
+                        </a>
+                        <a href="https://github.com/yikuaihaimian" target="_blank" class="footer-link" style="padding: 1rem 2rem;">
+                            <i class="bi bi-github" style="color: #fff;"></i>
+                            @yikuaihaimian
                         </a>
                     </div>
                 </div>
@@ -915,206 +1492,89 @@
         </div>
     </section>
 
-    <!-- 技术技能 -->
-    <section id="skills" class="section">
+    <!-- 页脚 -->
+    <footer class="footer">
         <div class="container">
-            <div class="section-title">
-                <h2>技术技能</h2>
-            </div>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="skill-category fade-in">
-                        <h4><i class="bi bi-braces"></i>后端开发</h4>
-                        <div class="skill-item">
-                            <span class="skill-name">Java / Spring生态</span>
-                            <div class="skill-level">
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">MySQL / Redis</span>
-                            <div class="skill-level">
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot"></span>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">RabbitMQ / RocketMQ</span>
-                            <div class="skill-level">
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot"></span>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">SpringCloud微服务</span>
-                            <div class="skill-level">
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot"></span>
-                            </div>
-                        </div>
-                    </div>
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
+                        <circle cx="20" cy="20" r="18" fill="#07C160"/>
+                        <path d="M20 8C14 8 10 12.5 10 18C10 21.5 11.5 24.5 14 26.5L13 32L20 29L27 32L26 26.5C28.5 24.5 30 21.5 30 18C30 12.5 26 8 20 8Z" fill="white"/>
+                        <circle cx="16" cy="16" r="2" fill="#07C160"/>
+                        <circle cx="24" cy="16" r="2" fill="#07C160"/>
+                    </svg>
+                    Yuze Tang
                 </div>
-                <div class="col-md-4">
-                    <div class="skill-category fade-in">
-                        <h4><i class="bi bi-robot"></i>AI应用开发</h4>
-                        <div class="skill-item">
-                            <span class="skill-name">SpringAI / LangChain4j</span>
-                            <div class="skill-level">
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot"></span>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">RAG / Agentic RAG</span>
-                            <div class="skill-level">
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot"></span>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Function Calling / MCP</span>
-                            <div class="skill-level">
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot"></span>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">LoRA微调 / 多模态</span>
-                            <div class="skill-level">
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot"></span>
-                                <span class="skill-dot"></span>
-                            </div>
-                        </div>
-                    </div>
+                <p class="footer-text">
+                    电子科技大学 · 后端开发工程师 · AI应用开发
+                </p>
+                <div class="footer-links">
+                    <a href="https://github.com/yikuaihaimian" target="_blank" class="footer-link">
+                        <i class="bi bi-github"></i>
+                        GitHub
+                    </a>
+                    <a href="https://github.com/yikuaihaimian/psych-agent" target="_blank" class="footer-link">
+                        <i class="bi bi-heart-pulse"></i>
+                        心理Agent
+                    </a>
+                    <a href="https://github.com/yikuaihaimian/streamcore" target="_blank" class="footer-link">
+                        <i class="bi bi-play-circle"></i>
+                        StreamCore
+                    </a>
+                    <a href="https://github.com/yikuaihaimian/agent-moead" target="_blank" class="footer-link">
+                        <i class="bi bi-robot"></i>
+                        Agent-MOEA/D
+                    </a>
                 </div>
-                <div class="col-md-4">
-                    <div class="skill-category fade-in">
-                        <h4><i class="bi bi-tools"></i>工具平台</h4>
-                        <div class="skill-item">
-                            <span class="skill-name">Git / Docker / Linux</span>
-                            <div class="skill-level">
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot"></span>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">IntelliJ IDEA</span>
-                            <div class="skill-level">
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot"></span>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Nacos / XXL-Job</span>
-                            <div class="skill-level">
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot"></span>
-                                <span class="skill-dot"></span>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">RobotStudio</span>
-                            <div class="skill-level">
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot active"></span>
-                                <span class="skill-dot"></span>
-                                <span class="skill-dot"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <p class="footer-copyright">
+                    &copy; 2026 Yuze Tang. Built with ❤️ for Tencent Interview
+                </p>
             </div>
-        </div>
-    </section>
-
-    <!-- 联系方式 -->
-    <footer id="contact">
-        <div class="container">
-            <div class="mb-4">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Tencent_logo.svg/200px-Tencent_logo.svg.png" 
-                     alt="腾讯" style="height: 35px; filter: brightness(0) invert(1); opacity: 0.7;">
-            </div>
-            <h5><i class="bi bi-chat-heart-fill me-2"></i>联系我</h5>
-            <div class="social-links">
-                <a href="mailto:tyz1388@163.com" class="social-link" title="邮箱">
-                    <i class="bi bi-envelope-fill"></i>
-                </a>
-                <a href="https://github.com/yikuaihaimian" target="_blank" class="social-link" title="GitHub">
-                    <i class="bi bi-github"></i>
-                </a>
-                <a href="#" class="social-link" title="微信">
-                    <i class="bi bi-wechat"></i>
-                </a>
-            </div>
-            <p style="opacity: 0.7; margin-bottom: 0;">
-                感谢您的关注！期待与您交流合作<br>
-                <small>© 2026 唐语哲 · 电子科技大学 · 求职意向：腾讯后台开发</small>
-            </p>
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // 粒子背景
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = (15 + Math.random() * 15) + 's';
+            particlesContainer.appendChild(particle);
+        }
+
         // 滚动动画
         const fadeElements = document.querySelectorAll('.fade-in');
-        
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
                 }
             });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        });
-        
+        }, { threshold: 0.1 });
+
         fadeElements.forEach(el => observer.observe(el));
-        
+
         // 平滑滚动
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+            anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
